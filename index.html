@@ -474,7 +474,7 @@ body {
 
 <canvas id="sparkle-canvas"></canvas>
 
-<audio id="bg-music" loop autoplay>
+<audio id="bg-music" loop>
   <source src="x.mp3" type="audio/mpeg">
 </audio>
 
@@ -769,25 +769,11 @@ body {
 const audio  = document.getElementById('bg-music');
 const label  = document.getElementById('music-label');
 const note   = document.getElementById('music-note');
-let playing  = true;
+let playing  = false;
 
-// Try autoplay; update button if blocked
-audio.play().catch(() => {
-  playing = false;
-  label.textContent = 'Reproducir música';
-  note.style.animation = 'none';
-});
-
-// First tap/click outside button starts music
-document.addEventListener('click', function starter(e){
-  if(!playing && e.target.id !== 'music-btn' && !e.target.closest('#music-btn')){
-    audio.play().then(() => {
-      playing = true;
-      label.textContent = 'Pausar música';
-      note.style.animation = '';
-    });
-  }
-});
+// Start paused
+label.textContent = 'Reproducir música';
+note.style.animation = 'none';
 
 function toggleMusic(){
   if(playing){
