@@ -6,7 +6,6 @@
 <title>Ceremonia de Graduación · 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-<link rel="stylesheet" href="estilos.css">
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -20,7 +19,7 @@
   --bg:          #060400;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 
 body {
   font-family: 'EB Garamond', serif;
@@ -40,19 +39,23 @@ body {
 
 /* MUSIC BTN */
 .music-btn {
-  position: fixed; top: 18px; right: 18px; z-index: 200;
+  position: fixed; top: 18px; right: 18px; z-index: 9999;
   background: rgba(6,4,0,0.9);
   border: 1px solid rgba(201,168,76,0.55);
   color: var(--gold-light);
   font-family: 'Cinzel', serif;
   font-size: 12px; font-weight: 700; letter-spacing: 2px;
   padding: 10px 20px; border-radius: 40px;
-  cursor: pointer; transition: background .35s, color .35s, border-color .35s, box-shadow .35s;
+  cursor: pointer;
+  transition: background .35s, color .35s, border-color .35s, box-shadow .35s;
   backdrop-filter: blur(14px);
   display: flex; align-items: center; gap: 8px;
+  /* Anular TODA animación y transformación heredada */
   animation: none !important;
   transform: none !important;
   opacity: 1 !important;
+  will-change: auto !important;
+  contain: layout style;
 }
 .music-btn:hover {
   background: var(--gold);
@@ -83,14 +86,12 @@ body {
 /* TOP ORNAMENT */
 .top-ornament {
   text-align: center; margin-bottom: 40px;
-  opacity: 0; animation: fadeUp .9s .1s forwards;
 }
 .top-ornament svg { width: 280px; max-width: 82%; }
 
 /* SEAL */
 .seal {
   text-align: center; margin-bottom: 28px;
-  opacity: 0; animation: fadeUp .9s .2s forwards;
 }
 .seal-ring {
   display: inline-flex; align-items: center; justify-content: center;
@@ -109,7 +110,6 @@ body {
   font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
   letter-spacing: 6px; color: var(--gold); text-transform: uppercase;
   margin-bottom: 14px;
-  opacity: 0; animation: fadeUp .9s .3s forwards;
 }
 .header h1 {
   font-family: 'Cinzel Decorative', serif;
@@ -120,7 +120,6 @@ body {
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1.2; margin-bottom: 22px;
-  opacity: 0; animation: fadeUp .9s .42s forwards;
   letter-spacing: 1.5px;
 }
 .year-badge {
@@ -130,14 +129,12 @@ body {
   border-top: 1px solid rgba(201,168,76,0.35);
   border-bottom: 1px solid rgba(201,168,76,0.35);
   padding: 6px 28px; margin: 10px 0 26px;
-  opacity: 0; animation: fadeUp .9s .52s forwards;
 }
 .subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic; font-size: clamp(1.15rem, 3vw, 1.5rem);
   color: rgba(253,248,238,0.65); letter-spacing: 1px;
   max-width: 520px; margin: 0 auto;
-  opacity: 0; animation: fadeUp .9s .62s forwards;
 }
 
 /* DIVIDER */
@@ -147,12 +144,11 @@ body {
 }
 .divider .line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.45), transparent); }
 .divider .orn { color: var(--gold); font-size: 10px; letter-spacing: 4px; white-space: nowrap; }
-.div-anim { opacity: 0; animation: fadeUp .9s .7s forwards; }
+.div-anim { }
 
 /* GRAD TEXT */
 .grad-text {
   text-align: center; padding: 40px 16px 16px;
-  opacity: 0; animation: fadeUp .9s .72s forwards;
 }
 .grad-text .overline {
   font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
@@ -192,7 +188,6 @@ body {
   margin: 80px auto 0;
   padding-bottom: 120px;
   overflow: visible;
-  opacity: 0; animation: fadeUp 1.1s .82s forwards;
 }
 .ground-light {
   position: absolute; bottom: -60px; left: 50%;
@@ -256,7 +251,6 @@ body {
 /* COUNTDOWN */
 .countdown-wrap {
   text-align: center; margin: 20px 0 40px;
-  opacity: 0; animation: fadeUp .9s 1s forwards;
 }
 .cd-eyebrow {
   font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
@@ -298,7 +292,6 @@ body {
 /* CARDS */
 .cards-section {
   margin: 70px 0;
-  opacity: 0; animation: fadeUp .9s 1.1s forwards;
 }
 .cards-title {
   text-align: center;
@@ -358,7 +351,6 @@ body {
 /* RSVP */
 .rsvp-section {
   text-align: center; margin: 70px 0 30px;
-  opacity: 0; animation: fadeUp .9s 1.22s forwards;
 }
 .rsvp-notice {
   font-family: 'Cormorant Garamond', serif;
@@ -391,7 +383,6 @@ body {
 /* GIFTS */
 .gifts-section {
   text-align: center; margin: 80px 0 30px;
-  opacity: 0; animation: fadeUp .9s 1.33s forwards;
 }
 .gifts-eyebrow {
   font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
@@ -424,7 +415,6 @@ body {
 /* VERSE */
 .verse-section {
   text-align: center; margin: 80px 0 24px;
-  opacity: 0; animation: fadeUp .9s 1.44s forwards;
 }
 .verse {
   font-family: 'Cormorant Garamond', serif;
@@ -444,7 +434,6 @@ body {
 /* FOOTER */
 .footer {
   text-align: center; margin-top: 90px;
-  opacity: 0; animation: fadeUp .9s 1.52s forwards;
 }
 .footer-family {
   font-family: 'Cinzel Decorative', serif;
@@ -463,7 +452,6 @@ body {
 /* SCROLL ARROW */
 .scroll-arrow {
   text-align: center; margin-top: 50px; margin-bottom: 10px;
-  opacity: 0; animation: fadeUp .9s .68s forwards;
 }
 .scroll-arrow a {
   display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
@@ -481,8 +469,20 @@ body {
 
 /* ANIMATIONS */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Elementos que se revelan al hacer scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* RESPONSIVE */
@@ -494,6 +494,7 @@ body {
   .page { padding: 44px 18px 70px; }
 }
 </style>
+<link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
@@ -511,7 +512,7 @@ body {
 <div class="page">
 
   <!-- Top ornament -->
-  <div class="top-ornament">
+  <div class="top-ornament reveal">
     <svg viewBox="0 0 320 44" fill="none" xmlns="http://www.w3.org/2000/svg">
       <line x1="0" y1="22" x2="108" y2="22" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.45"/>
       <path d="M120 8 L128 22 L120 36 L112 22 Z" fill="none" stroke="#C9A84C" stroke-width="0.7" stroke-opacity="0.65"/>
@@ -525,14 +526,14 @@ body {
   </div>
 
   <!-- Seal -->
-  <div class="seal">
+  <div class="seal reveal">
     <div class="seal-ring">
       <img src="B.png" alt="Birrete" onerror="this.parentElement.style.fontSize='30px'; this.parentElement.textContent='🎓'">
     </div>
   </div>
 
   <!-- Header -->
-  <div class="header">
+  <div class="header reveal">
     <p class="eyebrow">Generación · 2026</p>
     <h1>Ceremonia<br>de Graduación</h1>
     <div class="year-badge">MMXXVI</div>
@@ -543,7 +544,7 @@ body {
   </div>
 
   <!-- Scroll arrow -->
-  <div class="scroll-arrow">
+  <div class="scroll-arrow reveal">
     <a href="#grad-content">
       <span>Descubre más</span>
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -553,12 +554,12 @@ body {
     </a>
   </div>
 
-  <div id="grad-content" class="divider div-anim">
+  <div id="grad-content" class="divider div-anim reveal">
     <div class="line"></div><div class="orn">✦ ✦ ✦</div><div class="line"></div>
   </div>
 
   <!-- Graduation text -->
-  <div class="grad-text">
+  <div class="grad-text reveal">
     <p class="overline">Una palabra para ellos</p>
     <blockquote>
       Hoy, al cerrar un capítulo y abrir otro con la frente en alto,
@@ -605,7 +606,7 @@ body {
   </div>
 
   <!-- Image -->
-  <div class="image-section">
+  <div class="image-section reveal">
     <div class="ground-light"></div>
     <div class="light-rays"></div>
     <div class="img-frame">
@@ -615,7 +616,7 @@ body {
   </div>
 
   <!-- Countdown -->
-  <div class="countdown-wrap">
+  <div class="countdown-wrap reveal">
     <div class="countdown-frame">
     <p class="cd-eyebrow">Cuenta regresiva al gran día</p>
     <div class="countdown">
@@ -635,7 +636,7 @@ body {
   </div>
 
   <!-- Cards -->
-  <div class="cards-section">
+  <div class="cards-section reveal">
     <p class="cards-title">Detalles del evento</p>
     <div class="cards">
       <div class="card">
@@ -664,7 +665,7 @@ body {
   </div>
 
   <!-- Gifts -->
-  <div class="gifts-section">
+  <div class="gifts-section reveal">
     <p class="gifts-eyebrow">Mesa de Regalos</p>
     <p class="gifts-text">
       Si deseas honrar a los graduados con un obsequio,
@@ -684,7 +685,7 @@ body {
   </div>
 
   <!-- RSVP -->
-  <div class="rsvp-section">
+  <div class="rsvp-section reveal">
     <p class="rsvp-notice">✦ Por favor, confírmanos 15 días antes ✦</p>
     <a class="btn-rsvp" href="https://forms.gle/ceFe7FYzThacnA1J7" target="_blank" rel="noopener">
       Confirmar asistencia
@@ -696,7 +697,7 @@ body {
   </div>
 
   <!-- Verse -->
-  <div class="verse-section">
+  <div class="verse-section reveal">
     <div class="verse">
       "Todo lo puedo en Cristo que me fortalece."
       <cite>— Filipenses 4:13</cite>
@@ -704,7 +705,7 @@ body {
   </div>
 
   <!-- Footer -->
-  <div class="footer">
+  <div class="footer reveal">
     <div class="divider" style="margin-bottom:28px;">
       <div class="line"></div><div class="orn">✦ ✦ ✦</div><div class="line"></div>
     </div>
@@ -777,6 +778,36 @@ body {
   })();
 })();
 
+/* ── SCROLL REVEAL con IntersectionObserver ── */
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  
+  // Elementos en el viewport inicial aparecen de inmediato con pequeño delay escalonado
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target); // solo una vez
+      }
+    });
+  }, { threshold: 0.12 });
+
+  els.forEach((el, i) => {
+    // Pequeño delay escalonado solo para los primeros elementos visibles
+    el.style.transitionDelay = (i * 0.06) + 's';
+    io.observe(el);
+  });
+})();
+
+/* ── SCROLL SUAVE para el botón "Descubre más" ── */
+document.querySelector('.scroll-arrow a').addEventListener('click', function(e) {
+  e.preventDefault();
+  const target = document.getElementById('grad-content');
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});
+
 /* ── COUNTDOWN ── */
 (function(){
   const target = new Date('2026-06-06T20:00:00');
@@ -793,26 +824,28 @@ body {
 })();
 
 /* ── MUSIC ── */
-const audio  = document.getElementById('bg-music');
-const label  = document.getElementById('music-label');
-const note   = document.getElementById('music-note');
-let playing  = false;
+(function(){
+  const audio = document.getElementById('bg-music');
+  const label = document.getElementById('music-label');
+  const note  = document.getElementById('music-note');
+  let playing = false;
 
-// Start paused
-label.textContent = 'Reproducir música';
-note.classList.remove('playing');
+  label.textContent = 'Reproducir música';
 
-function toggleMusic(){
-  if(playing){
-    audio.pause(); playing = false;
-    label.textContent = 'Reproducir música';
-    note.classList.remove('playing');
-  } else {
-    audio.play(); playing = true;
-    label.textContent = 'Pausar música';
-    note.classList.add('playing');
-  }
-}
+  window.toggleMusic = function() {
+    if (playing) {
+      audio.pause();
+      playing = false;
+      label.textContent = 'Reproducir música';
+      note.classList.remove('playing');
+    } else {
+      audio.play().catch(() => {});
+      playing = true;
+      label.textContent = 'Pausar música';
+      note.classList.add('playing');
+    }
+  };
+})();
 </script>
 </body>
 </html>
