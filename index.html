@@ -28,6 +28,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.7;
+  font-size: 18px;
 }
 
 /* CANVAS */
@@ -43,7 +44,7 @@ body {
   border: 1px solid rgba(201,168,76,0.55);
   color: var(--gold-light);
   font-family: 'Cinzel', serif;
-  font-size: 10px; letter-spacing: 2px;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
   padding: 10px 20px; border-radius: 40px;
   cursor: pointer; transition: all .35s;
   backdrop-filter: blur(14px);
@@ -94,14 +95,14 @@ body {
 /* HEADER */
 .header { text-align: center; margin-bottom: 4px; }
 .eyebrow {
-  font-family: 'Cinzel', serif; font-size: 9.5px;
+  font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
   letter-spacing: 6px; color: var(--gold); text-transform: uppercase;
   margin-bottom: 14px;
   opacity: 0; animation: fadeUp .9s .3s forwards;
 }
 .header h1 {
   font-family: 'Cinzel Decorative', serif;
-  font-size: clamp(1.65rem, 5.5vw, 3.7rem); font-weight: 700;
+  font-size: clamp(2.1rem, 6.5vw, 4.5rem); font-weight: 700;
   background: linear-gradient(160deg,
     var(--gold-pale) 0%, var(--gold-light) 25%,
     var(--gold) 52%, #8A6010 75%, var(--gold-light) 100%);
@@ -113,8 +114,8 @@ body {
 }
 .year-badge {
   display: inline-block;
-  font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 7px;
-  color: rgba(201,168,76,0.8);
+  font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700; letter-spacing: 7px;
+  color: rgba(201,168,76,0.9);
   border-top: 1px solid rgba(201,168,76,0.35);
   border-bottom: 1px solid rgba(201,168,76,0.35);
   padding: 6px 28px; margin: 6px 0 18px;
@@ -122,7 +123,7 @@ body {
 }
 .subtitle {
   font-family: 'Cormorant Garamond', serif;
-  font-style: italic; font-size: clamp(.95rem, 2.6vw, 1.25rem);
+  font-style: italic; font-size: clamp(1.15rem, 3vw, 1.5rem);
   color: rgba(253,248,238,0.65); letter-spacing: 1px;
   max-width: 520px; margin: 0 auto;
   opacity: 0; animation: fadeUp .9s .62s forwards;
@@ -143,14 +144,14 @@ body {
   opacity: 0; animation: fadeUp .9s .72s forwards;
 }
 .grad-text .overline {
-  font-family: 'Cinzel', serif; font-size: 8.5px;
+  font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
   letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
   margin-bottom: 20px;
 }
 .grad-text blockquote {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: clamp(1.05rem, 2.8vw, 1.42rem);
+  font-size: clamp(1.25rem, 3.2vw, 1.65rem);
   color: rgba(253,248,238,0.88);
   line-height: 1.95; max-width: 620px; margin: 0 auto 24px;
 }
@@ -158,7 +159,7 @@ body {
   color: var(--gold-light); font-style: normal;
 }
 .graduates-intro {
-  font-family: 'Cinzel', serif; font-size: 8.5px;
+  font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
   letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
   margin: 26px 0 16px;
 }
@@ -168,7 +169,7 @@ body {
 }
 .grad-names span {
   font-family: 'Cormorant Garamond', serif;
-  font-style: italic; font-size: 1rem;
+  font-style: italic; font-size: 1.2rem;
   color: rgba(253,248,238,0.72); white-space: nowrap;
 }
 .grad-names span::before { content: "· "; color: rgba(201,168,76,.7); }
@@ -245,7 +246,7 @@ body {
   opacity: 0; animation: fadeUp .9s 1s forwards;
 }
 .cd-eyebrow {
-  font-family: 'Cinzel', serif; font-size: 8.5px;
+  font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
   letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
   margin-bottom: 16px;
 }
@@ -262,7 +263,7 @@ body {
   color: var(--gold-light); min-width: 2ch; text-align: center;
 }
 .cd-lbl {
-  font-family: 'Cinzel', serif; font-size: 9px;
+  font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700;
   letter-spacing: 1.5px; color: var(--gold); text-transform: uppercase;
 }
 .cd-sep { color: rgba(201,168,76,0.35); font-size: 1.3rem; }
@@ -274,7 +275,7 @@ body {
 }
 .cards-title {
   text-align: center;
-  font-family: 'Cinzel', serif; font-size: 8.5px;
+  font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
   letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
   margin-bottom: 22px;
 }
@@ -306,13 +307,13 @@ body {
 .card:hover::after { opacity: 1; }
 .card-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
 .card-cap {
-  font-family: 'Cinzel', serif; font-size: 8px;
+  font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700;
   letter-spacing: 3.5px; color: var(--gold); text-transform: uppercase;
   margin-bottom: 10px;
 }
 .card-main {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1rem, 2.4vw, 1.15rem); color: var(--cream);
+  font-size: clamp(1.15rem, 2.8vw, 1.35rem); color: var(--cream);
   line-height: 1.5;
 }
 .card-main strong {
@@ -321,7 +322,7 @@ body {
 }
 .map-cta {
   display: inline-block; margin-top: 10px;
-  font-family: 'Cinzel', serif; font-size: 8px;
+  font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700;
   letter-spacing: 2px; color: var(--gold); text-transform: uppercase;
   border-bottom: 1px solid rgba(201,168,76,0.35);
   padding-bottom: 2px;
@@ -334,7 +335,7 @@ body {
 }
 .rsvp-notice {
   font-family: 'Cormorant Garamond', serif;
-  font-style: italic; font-size: clamp(.95rem, 2.4vw, 1.15rem);
+  font-style: italic; font-size: clamp(1.1rem, 2.8vw, 1.35rem);
   color: rgba(201,168,76,0.85); letter-spacing: 1.5px;
   margin-bottom: 26px;
 }
@@ -345,7 +346,7 @@ body {
   animation: bs 4s ease-in-out infinite;
   color: var(--ink);
   font-family: 'Cinzel', serif;
-  font-size: 11px; letter-spacing: 3px; font-weight: 600;
+  font-size: 14px; letter-spacing: 3px; font-weight: 700;
   padding: 16px 48px; border-radius: 50px;
   text-decoration: none; border: none; cursor: pointer;
   transition: transform .3s, box-shadow .3s;
@@ -366,13 +367,13 @@ body {
   opacity: 0; animation: fadeUp .9s 1.33s forwards;
 }
 .gifts-eyebrow {
-  font-family: 'Cinzel', serif; font-size: 8.5px;
+  font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
   letter-spacing: 6px; color: var(--gold); text-transform: uppercase;
   margin-bottom: 12px;
 }
 .gifts-text {
   font-family: 'Cormorant Garamond', serif;
-  font-style: italic; font-size: clamp(.95rem,2.3vw,1.12rem);
+  font-style: italic; font-size: clamp(1.1rem,2.7vw,1.32rem);
   color: rgba(253,248,238,0.52);
   max-width: 460px; margin: 0 auto 26px; line-height: 1.9;
 }
@@ -380,7 +381,7 @@ body {
   display: inline-block;
   background: transparent; color: var(--gold-light);
   font-family: 'Cinzel', serif;
-  font-size: 10.5px; letter-spacing: 2.5px;
+  font-size: 13px; font-weight: 700; letter-spacing: 2.5px;
   padding: 14px 38px; border-radius: 50px;
   text-decoration: none;
   border: 1px solid rgba(201,168,76,0.45);
@@ -401,15 +402,15 @@ body {
 .verse {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: clamp(.95rem, 2.5vw, 1.2rem);
+  font-size: clamp(1.15rem, 3vw, 1.45rem);
   color: rgba(253,248,238,0.42);
   max-width: 480px; margin: 0 auto;
   line-height: 2; letter-spacing: .5px;
 }
 .verse cite {
   display: block; margin-top: 10px;
-  font-style: normal; font-size: .82rem;
-  color: rgba(201,168,76,0.45);
+  font-style: normal; font-size: 1rem; font-weight: 700;
+  color: rgba(201,168,76,0.65);
   letter-spacing: 2.5px; font-family: 'Cinzel', serif;
 }
 
@@ -440,7 +441,7 @@ body {
 .scroll-arrow a {
   display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
   text-decoration: none; color: rgba(201,168,76,0.7);
-  font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 3px;
+  font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700; letter-spacing: 3px;
   text-transform: uppercase;
   transition: color .3s;
 }
