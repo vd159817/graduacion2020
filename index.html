@@ -48,9 +48,12 @@ body {
   font-family: 'Cinzel', serif;
   font-size: 12px; font-weight: 700; letter-spacing: 2px;
   padding: 10px 20px; border-radius: 40px;
-  cursor: pointer; transition: all .35s;
+  cursor: pointer; transition: background .35s, color .35s, border-color .35s, box-shadow .35s;
   backdrop-filter: blur(14px);
   display: flex; align-items: center; gap: 8px;
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
 }
 .music-btn:hover {
   background: var(--gold);
@@ -58,7 +61,18 @@ body {
   border-color: var(--gold);
   box-shadow: 0 0 24px var(--shadow-gold);
 }
-.music-note { font-size: 15px; }
+.music-note {
+  font-size: 15px;
+  display: inline-block;
+  animation: none;
+}
+@keyframes noteFloat {
+  0%,100% { transform: translateY(0) rotate(-8deg); }
+  50%     { transform: translateY(-3px) rotate(8deg); }
+}
+.music-note.playing {
+  animation: noteFloat 1.2s ease-in-out infinite;
+}
 
 /* PAGE */
 .page {
@@ -247,14 +261,28 @@ body {
 }
 .cd-eyebrow {
   font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
-  letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
-  margin-bottom: 16px;
+  letter-spacing: 5px; color: var(--gold-light); text-transform: uppercase;
+  margin-bottom: 0;
+  padding-bottom: 14px;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid rgba(201,168,76,0.28);
+  text-shadow: 0 0 18px rgba(201,168,76,0.6), 0 0 40px rgba(201,168,76,0.3);
+}
+.countdown-frame {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 14px;
+  background: rgba(6,4,0,0.75);
+  border: 1px solid rgba(201,168,76,0.32);
+  border-radius: 26px; padding: 20px 36px 20px;
+  box-shadow: 0 0 40px rgba(201,168,76,0.1), inset 0 0 60px rgba(6,4,0,0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 .countdown {
   display: inline-flex; gap: 6px; align-items: center; flex-wrap: nowrap;
-  background: rgba(201,168,76,0.03);
-  border: 1px solid rgba(201,168,76,0.26);
-  border-radius: 60px; padding: 16px 28px;
+  background: transparent;
+  border: none;
+  border-radius: 0; padding: 0;
 }
 .cd-unit { display: flex; align-items: baseline; gap: 3px; white-space: nowrap; }
 .cd-num {
@@ -589,6 +617,7 @@ body {
 
   <!-- Countdown -->
   <div class="countdown-wrap">
+    <div class="countdown-frame">
     <p class="cd-eyebrow">Cuenta regresiva al gran día</p>
     <div class="countdown">
       <div class="cd-unit"><span class="cd-num" id="cd-days">00</span><span class="cd-lbl">Días</span></div>
@@ -599,6 +628,7 @@ body {
       <span class="cd-sep">·</span>
       <div class="cd-unit"><span class="cd-num" id="cd-seconds">00</span><span class="cd-lbl">Sec</span></div>
     </div>
+    </div><!-- /countdown-frame -->
   </div>
 
   <div class="divider">
@@ -771,17 +801,17 @@ let playing  = false;
 
 // Start paused
 label.textContent = 'Reproducir música';
-note.style.animation = 'none';
+note.classList.remove('playing');
 
 function toggleMusic(){
   if(playing){
     audio.pause(); playing = false;
     label.textContent = 'Reproducir música';
-    note.style.animation = 'none';
+    note.classList.remove('playing');
   } else {
     audio.play(); playing = true;
     label.textContent = 'Pausar música';
-    note.style.animation = '';
+    note.classList.add('playing');
   }
 }
 </script>
