@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ceremonia de Graduación · 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:        #C9A84C;
+  --gold-light:  #F0D080;
+  --gold-pale:   #FFF8E1;
+  --gold-deep:   #A07828;
+  --cream:       #FDF8EE;
+  --ink:         #0C0800;
+  --shadow-gold: rgba(201,168,76,0.4);
+  --bg:          #060400;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'EB Garamond', serif;
+  background: var(--bg);
+  color: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* CANVAS */
+#sparkle-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+}
+
+/* MUSIC BTN */
+.music-btn {
+  position: fixed; top: 18px; right: 18px; z-index: 200;
+  background: rgba(6,4,0,0.9);
+  border: 1px solid rgba(201,168,76,0.55);
+  color: var(--gold-light);
+  font-family: 'Cinzel', serif;
+  font-size: 10px; letter-spacing: 2px;
+  padding: 10px 20px; border-radius: 40px;
+  cursor: pointer; transition: all .35s;
+  backdrop-filter: blur(14px);
+  display: flex; align-items: center; gap: 8px;
+}
+.music-btn:hover {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+  box-shadow: 0 0 24px var(--shadow-gold);
+}
+.music-note { font-size: 15px; animation: pulse-note 2.5s ease-in-out infinite; }
+@keyframes pulse-note {
+  0%,100%{ transform: scale(1); opacity: .7; }
+  50%    { transform: scale(1.25); opacity: 1; }
+}
+
+/* PAGE */
+.page {
+  position: relative; z-index: 1;
+  max-width: 820px; margin: 0 auto;
+  padding: 60px 24px 90px;
+}
+
+/* TOP ORNAMENT */
+.top-ornament {
+  text-align: center; margin-bottom: 28px;
+  opacity: 0; animation: fadeUp .9s .1s forwards;
+}
+.top-ornament svg { width: 280px; max-width: 82%; }
+
+/* SEAL */
+.seal {
+  text-align: center; margin-bottom: 16px;
+  opacity: 0; animation: fadeUp .9s .2s forwards;
+}
+.seal-ring {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 80px; height: 80px; border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.7);
+  box-shadow: 0 0 24px rgba(201,168,76,0.25), inset 0 0 18px rgba(201,168,76,0.06);
+  overflow: hidden;
+}
+.seal-ring img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+
+/* HEADER */
+.header { text-align: center; margin-bottom: 4px; }
+.eyebrow {
+  font-family: 'Cinzel', serif; font-size: 9.5px;
+  letter-spacing: 6px; color: var(--gold); text-transform: uppercase;
+  margin-bottom: 14px;
+  opacity: 0; animation: fadeUp .9s .3s forwards;
+}
+.header h1 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.65rem, 5.5vw, 3.7rem); font-weight: 700;
+  background: linear-gradient(160deg,
+    var(--gold-pale) 0%, var(--gold-light) 25%,
+    var(--gold) 52%, #8A6010 75%, var(--gold-light) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2; margin-bottom: 14px;
+  opacity: 0; animation: fadeUp .9s .42s forwards;
+  letter-spacing: 1.5px;
+}
+.year-badge {
+  display: inline-block;
+  font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 7px;
+  color: rgba(201,168,76,0.8);
+  border-top: 1px solid rgba(201,168,76,0.35);
+  border-bottom: 1px solid rgba(201,168,76,0.35);
+  padding: 6px 28px; margin: 6px 0 18px;
+  opacity: 0; animation: fadeUp .9s .52s forwards;
+}
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: clamp(.95rem, 2.6vw, 1.25rem);
+  color: rgba(253,248,238,0.65); letter-spacing: 1px;
+  max-width: 520px; margin: 0 auto;
+  opacity: 0; animation: fadeUp .9s .62s forwards;
+}
+
+/* DIVIDER */
+.divider {
+  display: flex; align-items: center; gap: 16px;
+  margin: 30px auto; max-width: 440px;
+}
+.divider .line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.45), transparent); }
+.divider .orn { color: var(--gold); font-size: 10px; letter-spacing: 4px; white-space: nowrap; }
+.div-anim { opacity: 0; animation: fadeUp .9s .7s forwards; }
+
+/* GRAD TEXT */
+.grad-text {
+  text-align: center; padding: 28px 16px 8px;
+  opacity: 0; animation: fadeUp .9s .72s forwards;
+}
+.grad-text .overline {
+  font-family: 'Cinzel', serif; font-size: 8.5px;
+  letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.grad-text blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.8vw, 1.42rem);
+  color: rgba(253,248,238,0.88);
+  line-height: 1.95; max-width: 620px; margin: 0 auto 24px;
+}
+.grad-text blockquote em {
+  color: var(--gold-light); font-style: normal;
+}
+.graduates-intro {
+  font-family: 'Cinzel', serif; font-size: 8.5px;
+  letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
+  margin: 26px 0 16px;
+}
+.grad-names {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px;
+  max-width: 640px; margin: 0 auto;
+}
+.grad-names span {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1rem;
+  color: rgba(253,248,238,0.72); white-space: nowrap;
+}
+.grad-names span::before { content: "· "; color: rgba(201,168,76,.7); }
+.grad-names span::after  { content: " ·"; color: rgba(201,168,76,.7); }
+
+/* IMAGE */
+.image-section {
+  position: relative; text-align: center;
+  margin: 46px auto 16px;
+  opacity: 0; animation: fadeUp 1.1s .82s forwards;
+}
+.ground-light {
+  position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 360px; height: 380px;
+  background: radial-gradient(ellipse 58% 100% at 50% 100%,
+    rgba(201,168,76,0.5) 0%,
+    rgba(201,168,76,0.2) 28%,
+    rgba(180,130,40,0.06) 55%,
+    transparent 76%);
+  animation: gp 4s ease-in-out infinite; pointer-events: none; z-index: 0;
+}
+@keyframes gp {
+  0%,100%{ opacity:.8; transform:translateX(-50%) scaleX(1); }
+  50%    { opacity:1;  transform:translateX(-50%) scaleX(1.12); }
+}
+.light-rays {
+  position: absolute; bottom: -20px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 400px;
+  pointer-events: none; z-index: 0;
+  background: conic-gradient(from 72deg at 50% 100%,
+    transparent 0deg,   rgba(201,168,76,0.07) 5deg,   transparent 10deg,
+    transparent 19deg,  rgba(201,168,76,0.1)  24deg,  transparent 29deg,
+    transparent 38deg,  rgba(201,168,76,0.05) 43deg,  transparent 48deg,
+    transparent 57deg,  rgba(201,168,76,0.09) 62deg,  transparent 67deg,
+    transparent 76deg,  rgba(201,168,76,0.06) 81deg,  transparent 86deg,
+    transparent 95deg,  rgba(201,168,76,0.08) 100deg, transparent 105deg
+  );
+  animation: rr 14s linear infinite;
+}
+@keyframes rr { to { transform: translateX(-50%) rotate(360deg); } }
+.img-frame { position: relative; z-index: 2; display: inline-block; }
+.img-frame::before {
+  content: ''; position: absolute; inset: -14px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.3);
+  box-shadow: 0 0 40px rgba(201,168,76,0.14);
+  pointer-events: none;
+}
+.img-frame::after {
+  content: ''; position: absolute; inset: -7px;
+  border-radius: 50%;
+  border: 1px dashed rgba(201,168,76,0.22);
+  pointer-events: none;
+  animation: sf 32s linear infinite;
+}
+@keyframes sf { to { transform: rotate(360deg); } }
+.invite-img {
+  display: block;
+  width: clamp(210px, 44vw, 290px);
+  height: clamp(210px, 44vw, 290px);
+  object-fit: cover; border-radius: 50%;
+  border: 3px solid var(--gold);
+  box-shadow:
+    0 0 0 7px rgba(201,168,76,0.1),
+    0 0 44px rgba(201,168,76,0.32),
+    0 0 90px rgba(201,168,76,0.1);
+}
+
+/* COUNTDOWN */
+.countdown-wrap {
+  text-align: center; margin: 48px 0 24px;
+  opacity: 0; animation: fadeUp .9s 1s forwards;
+}
+.cd-eyebrow {
+  font-family: 'Cinzel', serif; font-size: 8.5px;
+  letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.countdown {
+  display: inline-flex; gap: 6px; align-items: center; flex-wrap: nowrap;
+  background: rgba(201,168,76,0.03);
+  border: 1px solid rgba(201,168,76,0.26);
+  border-radius: 60px; padding: 16px 28px;
+}
+.cd-unit { display: flex; align-items: baseline; gap: 3px; white-space: nowrap; }
+.cd-num {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.5rem, 4.5vw, 2.3rem); font-weight: 600;
+  color: var(--gold-light); min-width: 2ch; text-align: center;
+}
+.cd-lbl {
+  font-family: 'Cinzel', serif; font-size: 9px;
+  letter-spacing: 1.5px; color: var(--gold); text-transform: uppercase;
+}
+.cd-sep { color: rgba(201,168,76,0.35); font-size: 1.3rem; }
+
+/* CARDS */
+.cards-section {
+  margin: 44px 0;
+  opacity: 0; animation: fadeUp .9s 1.1s forwards;
+}
+.cards-title {
+  text-align: center;
+  font-family: 'Cinzel', serif; font-size: 8.5px;
+  letter-spacing: 5px; color: var(--gold); text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: linear-gradient(145deg, rgba(201,168,76,0.046), rgba(201,168,76,0.016));
+  border: 1px solid rgba(201,168,76,0.18);
+  border-radius: 18px; padding: 28px 20px;
+  text-align: center;
+  transition: all .4s cubic-bezier(.23,.92,.37,1);
+  text-decoration: none; color: inherit; display: block;
+  position: relative; overflow: hidden;
+}
+.card::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.09), transparent 55%);
+  opacity: 0; transition: opacity .4s; pointer-events: none;
+}
+.card:hover {
+  border-color: rgba(201,168,76,0.6);
+  transform: translateY(-8px);
+  box-shadow: 0 22px 54px rgba(201,168,76,0.14), 0 0 0 1px rgba(201,168,76,0.28);
+  background: linear-gradient(145deg, rgba(201,168,76,0.09), rgba(201,168,76,0.03));
+}
+.card:hover::after { opacity: 1; }
+.card-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+.card-cap {
+  font-family: 'Cinzel', serif; font-size: 8px;
+  letter-spacing: 3.5px; color: var(--gold); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.card-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.4vw, 1.15rem); color: var(--cream);
+  line-height: 1.5;
+}
+.card-main strong {
+  font-size: clamp(1.2rem, 3vw, 1.42rem);
+  display: block; color: var(--gold-pale); font-weight: 500;
+}
+.map-cta {
+  display: inline-block; margin-top: 10px;
+  font-family: 'Cinzel', serif; font-size: 8px;
+  letter-spacing: 2px; color: var(--gold); text-transform: uppercase;
+  border-bottom: 1px solid rgba(201,168,76,0.35);
+  padding-bottom: 2px;
+}
+
+/* RSVP */
+.rsvp-section {
+  text-align: center; margin: 50px 0 20px;
+  opacity: 0; animation: fadeUp .9s 1.22s forwards;
+}
+.rsvp-notice {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: clamp(.95rem, 2.4vw, 1.15rem);
+  color: rgba(201,168,76,0.85); letter-spacing: 1.5px;
+  margin-bottom: 26px;
+}
+.btn-rsvp {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold-deep), var(--gold-light), var(--gold), var(--gold-deep));
+  background-size: 300% 300%;
+  animation: bs 4s ease-in-out infinite;
+  color: var(--ink);
+  font-family: 'Cinzel', serif;
+  font-size: 11px; letter-spacing: 3px; font-weight: 600;
+  padding: 16px 48px; border-radius: 50px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: transform .3s, box-shadow .3s;
+  box-shadow: 0 6px 28px rgba(201,168,76,0.32);
+}
+.btn-rsvp:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 14px 42px rgba(201,168,76,0.5);
+}
+@keyframes bs {
+  0%,100%{ background-position: 0% 50%; }
+  50%    { background-position: 100% 50%; }
+}
+
+/* GIFTS */
+.gifts-section {
+  text-align: center; margin: 58px 0 18px;
+  opacity: 0; animation: fadeUp .9s 1.33s forwards;
+}
+.gifts-eyebrow {
+  font-family: 'Cinzel', serif; font-size: 8.5px;
+  letter-spacing: 6px; color: var(--gold); text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.gifts-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: clamp(.95rem,2.3vw,1.12rem);
+  color: rgba(253,248,238,0.52);
+  max-width: 460px; margin: 0 auto 26px; line-height: 1.9;
+}
+.btn-gift {
+  display: inline-block;
+  background: transparent; color: var(--gold-light);
+  font-family: 'Cinzel', serif;
+  font-size: 10.5px; letter-spacing: 2.5px;
+  padding: 14px 38px; border-radius: 50px;
+  text-decoration: none;
+  border: 1px solid rgba(201,168,76,0.45);
+  transition: all .35s;
+}
+.btn-gift:hover {
+  background: rgba(201,168,76,0.09);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(201,168,76,0.18);
+}
+
+/* VERSE */
+.verse-section {
+  text-align: center; margin: 54px 0 16px;
+  opacity: 0; animation: fadeUp .9s 1.44s forwards;
+}
+.verse {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(.95rem, 2.5vw, 1.2rem);
+  color: rgba(253,248,238,0.42);
+  max-width: 480px; margin: 0 auto;
+  line-height: 2; letter-spacing: .5px;
+}
+.verse cite {
+  display: block; margin-top: 10px;
+  font-style: normal; font-size: .82rem;
+  color: rgba(201,168,76,0.45);
+  letter-spacing: 2.5px; font-family: 'Cinzel', serif;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center; margin-top: 60px;
+  opacity: 0; animation: fadeUp .9s 1.52s forwards;
+}
+.footer-family {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(.9rem, 2.8vw, 1.4rem);
+  color: var(--gold); margin-bottom: 6px;
+  text-shadow: 0 0 32px rgba(201,168,76,0.28);
+}
+.footer-msg {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1rem;
+  color: rgba(253,248,238,0.38); letter-spacing: 2px;
+}
+.bottom-ornament { margin-top: 26px; opacity: .38; }
+.bottom-ornament svg { width: 200px; max-width: 65%; }
+
+/* SCROLL ARROW */
+.scroll-arrow {
+  text-align: center; margin-top: 32px; margin-bottom: 4px;
+  opacity: 0; animation: fadeUp .9s .68s forwards;
+}
+.scroll-arrow a {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
+  text-decoration: none; color: rgba(201,168,76,0.7);
+  font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: color .3s;
+}
+.scroll-arrow a:hover { color: var(--gold-light); }
+.scroll-arrow svg { animation: bounce-arrow 2s ease-in-out infinite; }
+@keyframes bounce-arrow {
+  0%,100% { transform: translateY(0); opacity: .7; }
+  50%     { transform: translateY(7px); opacity: 1; }
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .countdown { padding: 12px 14px; gap: 4px; }
+  .cd-num { font-size: 1.3rem; }
+  .cd-lbl { font-size: 7.5px; }
+  .btn-rsvp, .btn-gift { display: block; text-align: center; width: 100%; max-width: 340px; margin: 0 auto; }
+  .page { padding: 44px 18px 70px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="sparkle-canvas"></canvas>
+
+<audio id="bg-music" loop autoplay>
+  <source src="X.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="music-btn" onclick="toggleMusic()">
+  <span class="music-note" id="music-note">♪</span>
+  <span id="music-label">Pausar música</span>
+</button>
+
+<div class="page">
+
+  <!-- Top ornament -->
+  <div class="top-ornament">
+    <svg viewBox="0 0 320 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="22" x2="108" y2="22" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.45"/>
+      <path d="M120 8 L128 22 L120 36 L112 22 Z" fill="none" stroke="#C9A84C" stroke-width="0.7" stroke-opacity="0.65"/>
+      <circle cx="140" cy="22" r="2.5" fill="#C9A84C" fill-opacity="0.55"/>
+      <circle cx="160" cy="22" r="4" fill="none" stroke="#C9A84C" stroke-width="0.7" stroke-opacity="0.7"/>
+      <circle cx="160" cy="22" r="1.5" fill="#C9A84C" fill-opacity="0.6"/>
+      <circle cx="180" cy="22" r="2.5" fill="#C9A84C" fill-opacity="0.55"/>
+      <path d="M200 8 L208 22 L200 36 L192 22 Z" fill="none" stroke="#C9A84C" stroke-width="0.7" stroke-opacity="0.65"/>
+      <line x1="212" y1="22" x2="320" y2="22" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.45"/>
+    </svg>
+  </div>
+
+  <!-- Seal -->
+  <div class="seal">
+    <div class="seal-ring">
+      <img src="B.png" alt="Birrete" onerror="this.parentElement.style.fontSize='30px'; this.parentElement.textContent='🎓'">
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <p class="eyebrow">Generación · 2026</p>
+    <h1>Ceremonia<br>de Graduación</h1>
+    <div class="year-badge">MMXXVI</div>
+    <p class="subtitle">
+      Con profundo orgullo y gratitud, tenemos el honor<br>
+      de invitarte a celebrar este momento
+    </p>
+  </div>
+
+  <!-- Scroll arrow -->
+  <div class="scroll-arrow">
+    <a href="#grad-content">
+      <span>Descubre más</span>
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="13" stroke="#C9A84C" stroke-width="0.8" stroke-opacity="0.5"/>
+        <path d="M9 12 L14 18 L19 12" stroke="#C9A84C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <div id="grad-content" class="divider div-anim">
+    <div class="line"></div><div class="orn">✦ ✦ ✦</div><div class="line"></div>
+  </div>
+
+  <!-- Graduation text -->
+  <div class="grad-text">
+    <p class="overline">Una palabra para ellos</p>
+    <blockquote>
+      Hoy, al cerrar un capítulo y abrir otro con la frente en alto,
+      recordamos que los años de esfuerzo, desvelos y dedicación
+      no fueron en vano. Cada mañana de estudio, cada obstáculo
+      superado con entereza, cada lección aprendida con humildad
+      ha forjado el carácter de quienes hoy
+      <em>reciben su distinción con merecido honor.</em><br><br>
+      El conocimiento que llevan consigo no ocupa espacio,
+      no tiene peso, y nadie puede arrebatarlo.
+      Que esta graduación sea el inicio luminoso de un camino
+      lleno de propósito, integridad y grandeza.
+      El mundo los espera con urgencia,
+      <em>porque fueron educados para transformarlo.</em>
+    </blockquote>
+
+    <p class="graduates-intro">Nuestra generación</p>
+    <div class="grad-names">
+      <span>Sofía Martínez</span>
+      <span>Alejandro Reyes</span>
+      <span>Valeria Torres</span>
+      <span>Diego Hernández</span>
+      <span>Isabella Gómez</span>
+      <span>Sebastián Ríos</span>
+      <span>Camila Vázquez</span>
+      <span>Emilio Castillo</span>
+      <span>Lucía Morales</span>
+      <span>Mateo Jiménez</span>
+      <span>Fernanda Ruiz</span>
+      <span>Andrés Medina</span>
+      <span>Regina Salazar</span>
+      <span>Nicolás Flores</span>
+      <span>Mariana Sandoval</span>
+      <span>Rafael Ortega</span>
+      <span>Daniela Guerrero</span>
+      <span>Pablo Ramos</span>
+      <span>Gabriela Luna</span>
+      <span>Rodrigo Peña</span>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:36px;">
+    <div class="line"></div><div class="orn">◆</div><div class="line"></div>
+  </div>
+
+  <!-- Image -->
+  <div class="image-section">
+    <div class="ground-light"></div>
+    <div class="light-rays"></div>
+    <div class="img-frame">
+      <img src="A.png" alt="Graduación 2026" class="invite-img"
+           onerror="this.style.cssText='display:flex;width:260px;height:260px;border-radius:50%;border:3px solid #C9A84C;align-items:center;justify-content:center;font-size:5rem;background:rgba(201,168,76,0.05);'; this.alt='🎓'">
+    </div>
+  </div>
+
+  <!-- Countdown -->
+  <div class="countdown-wrap">
+    <p class="cd-eyebrow">Cuenta regresiva al gran día</p>
+    <div class="countdown">
+      <div class="cd-unit"><span class="cd-num" id="cd-days">00</span><span class="cd-lbl">Días</span></div>
+      <span class="cd-sep">·</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-hours">00</span><span class="cd-lbl">HR</span></div>
+      <span class="cd-sep">·</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-minutes">00</span><span class="cd-lbl">Min</span></div>
+      <span class="cd-sep">·</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-seconds">00</span><span class="cd-lbl">Sec</span></div>
+    </div>
+  </div>
+
+  <div class="divider">
+    <div class="line"></div><div class="orn">✦ ✦ ✦</div><div class="line"></div>
+  </div>
+
+  <!-- Cards -->
+  <div class="cards-section">
+    <p class="cards-title">Detalles del evento</p>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">📅</span>
+        <p class="card-cap">Fecha</p>
+        <div class="card-main"><strong>Sábado</strong>6 de Junio, 2026</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🕗</span>
+        <p class="card-cap">Hora</p>
+        <div class="card-main"><strong>8:00 PM</strong>Puntual</div>
+      </div>
+      <a class="card"
+         href="https://www.google.com/maps/search/?api=1&query=C.+Nvo.+Amanecer+S%2FN,+34000+Durango,+Dgo.+El+Olimpo+Durango"
+         target="_blank" rel="noopener">
+        <span class="card-icon">📍</span>
+        <p class="card-cap">Ubicación</p>
+        <div class="card-main"><strong>El Olimpo</strong></div>
+        <span class="map-cta">Ver en Google Maps →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider">
+    <div class="line"></div><div class="orn">◆</div><div class="line"></div>
+  </div>
+
+  <!-- Gifts -->
+  <div class="gifts-section">
+    <p class="gifts-eyebrow">Mesa de Regalos</p>
+    <p class="gifts-text">
+      Si deseas honrar a los graduados con un obsequio,
+      hemos preparado una selección especial para ti.
+      Tu gesto lleva consigo afecto sincero
+      y buenos deseos para su futuro.
+    </p>
+    <a class="btn-gift"
+       href="https://www.amazon.com/registries/gl/guest-view/3N3GB76CII4FF?ref_=cm_sw_r_cp_ud_ggr-subnav-share_05DSR8AC05H0012FNQHE"
+       target="_blank" rel="noopener">
+      🎁 &nbsp;Ver mesa de regalos
+    </a>
+  </div>
+
+  <div class="divider" style="margin-top:50px;">
+    <div class="line"></div><div class="orn">✦ ✦ ✦</div><div class="line"></div>
+  </div>
+
+  <!-- RSVP -->
+  <div class="rsvp-section">
+    <p class="rsvp-notice">✦ Por favor, confírmanos 15 días antes ✦</p>
+    <a class="btn-rsvp" href="https://forms.gle/ceFe7FYzThacnA1J7" target="_blank" rel="noopener">
+      Confirmar asistencia
+    </a>
+  </div>
+
+  <div class="divider" style="margin-top:50px;">
+    <div class="line"></div><div class="orn">◆</div><div class="line"></div>
+  </div>
+
+  <!-- Verse -->
+  <div class="verse-section">
+    <div class="verse">
+      "Todo lo puedo en Cristo que me fortalece."
+      <cite>— Filipenses 4:13</cite>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="divider" style="margin-bottom:28px;">
+      <div class="line"></div><div class="orn">✦ ✦ ✦</div><div class="line"></div>
+    </div>
+    <p class="footer-family">Con todo nuestro orgullo</p>
+    <p class="footer-msg">Los esperamos con los brazos abiertos</p>
+    <div class="bottom-ornament">
+      <svg viewBox="0 0 200 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="11" x2="82" y2="11" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.5"/>
+        <circle cx="100" cy="11" r="3.5" fill="none" stroke="#C9A84C" stroke-width="0.7" stroke-opacity="0.65"/>
+        <circle cx="100" cy="11" r="1.2" fill="#C9A84C" fill-opacity="0.55"/>
+        <line x1="118" y1="11" x2="200" y2="11" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+/* ── SPARKLES ── */
+(function(){
+  const canvas = document.getElementById('sparkle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, P = [];
+  const resize = () => { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; };
+  window.addEventListener('resize', resize); resize();
+  const rand = (a,b) => a + Math.random()*(b-a);
+  const GOLDS = ['rgba(240,208,128,','rgba(201,168,76,','rgba(255,235,170,','rgba(255,220,80,','rgba(170,130,45,','rgba(255,250,205,'];
+
+  class Particle {
+    init(v) {
+      this.x = rand(0,W); this.y = rand(0,H);
+      this.r = rand(0.6, 3.2);
+      this.alpha = v ? rand(0.15, 0.85) : 0;
+      this.maxA = rand(0.4, 0.92);
+      this.spd = rand(0.004, 0.014);
+      this.rising = !v;
+      this.vy = rand(-0.38, -0.06); this.vx = rand(-0.13, 0.13);
+      this.col = GOLDS[Math.floor(Math.random()*GOLDS.length)];
+      this.cross = this.r > 1.8;
+      this.tw = Math.random() > 0.4;
+      this.ts = rand(0.014, 0.054); this.to = rand(0, Math.PI*2);
+    }
+    constructor(v){ this.init(v); }
+    update(t){
+      if(this.rising){ this.alpha += this.spd; if(this.alpha >= this.maxA) this.rising = false; }
+      else { this.alpha -= this.spd*.5; if(this.alpha <= 0) this.init(false); }
+      this.x += this.vx; this.y += this.vy;
+      if(this.y < -8) this.init(false);
+    }
+    draw(t){
+      let a = this.alpha;
+      if(this.tw) a *= 0.5 + 0.5*Math.sin(t*this.ts + this.to);
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+      ctx.fillStyle = this.col + a + ')'; ctx.fill();
+      if(this.cross){
+        const s = this.r * 4;
+        ctx.strokeStyle = this.col + (a*.7) + ')'; ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(this.x-s,this.y); ctx.lineTo(this.x+s,this.y);
+        ctx.moveTo(this.x,this.y-s); ctx.lineTo(this.x,this.y+s);
+        ctx.stroke();
+      }
+    }
+  }
+  for(let i=0;i<240;i++) P.push(new Particle(true));
+  let t=0;
+  (function loop(){ ctx.clearRect(0,0,W,H); t++;
+    P.forEach(p=>{ p.update(t); p.draw(t); });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ── COUNTDOWN ── */
+(function(){
+  const target = new Date('2026-06-06T20:00:00');
+  const pad = n => String(Math.max(0,n)).padStart(2,'0');
+  function tick(){
+    const diff = target - new Date();
+    if(diff<=0){ ['cd-days','cd-hours','cd-minutes','cd-seconds'].forEach(id=>document.getElementById(id).textContent='00'); return; }
+    document.getElementById('cd-days').textContent    = pad(Math.floor(diff/86400000));
+    document.getElementById('cd-hours').textContent   = pad(Math.floor((diff%86400000)/3600000));
+    document.getElementById('cd-minutes').textContent = pad(Math.floor((diff%3600000)/60000));
+    document.getElementById('cd-seconds').textContent = pad(Math.floor((diff%60000)/1000));
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+/* ── MUSIC ── */
+const audio  = document.getElementById('bg-music');
+const label  = document.getElementById('music-label');
+const note   = document.getElementById('music-note');
+let playing  = true;
+
+// Try autoplay; update button if blocked
+audio.play().catch(() => {
+  playing = false;
+  label.textContent = 'Reproducir música';
+  note.style.animation = 'none';
+});
+
+// First tap/click outside button starts music
+document.addEventListener('click', function starter(e){
+  if(!playing && e.target.id !== 'music-btn' && !e.target.closest('#music-btn')){
+    audio.play().then(() => {
+      playing = true;
+      label.textContent = 'Pausar música';
+      note.style.animation = '';
+    });
+  }
+});
+
+function toggleMusic(){
+  if(playing){
+    audio.pause(); playing = false;
+    label.textContent = 'Reproducir música';
+    note.style.animation = 'none';
+  } else {
+    audio.play(); playing = true;
+    label.textContent = 'Pausar música';
+    note.style.animation = '';
+  }
+}
+</script>
+</body>
+</html>
