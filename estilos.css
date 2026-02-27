@@ -1,0 +1,6 @@
+/* AÑADE ESTO AL FINAL DEL CSS */
+.music-btn {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
